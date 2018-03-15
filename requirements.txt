@@ -45,10 +45,7 @@ requests-oauthlib==0.8.0
 rsa==3.4.2
 Send2Trash==1.4.2
 six==1.11.0
-system-service==0.3
-terminado==0.8.1
 testpath==0.3.1
-tornado==4.5.3
 traitlets==4.3.2
 ufw==0.35
 unattended-upgrades==0.1

@@ -25,19 +25,18 @@ def sendSimpleEmail(request,emailto):
 def alphaFn(request, var) :
 	return redirect(sendSimpleEmail,"abhisni@iitk.ac.in")
 
-def index(request):
-  if request.method == 'POST':
-    fb_live_form = fb_url_live(request.POST)
-    fb_non_live_form = fb_url_nonlive(request.POST)
-    yt_form = yt_url(request.POST)
+# def index(request):
+#   if request.method == 'POST':
+#     fb_live_form = fb_url_live(request.POST)
+#     fb_non_live_form = fb_url_nonlive(request.POST)
+#     yt_form = yt_url(request.POST)
 
-    if(fb_live_form.is_valid()):
-      fb_live_url = fb_live_form.cleaned_data['url']
-      
-    else if(fb_non_live_form.is_valid()):
-      fb_non_live_url = fb_non_live_form.cleaned_data['url']
-    else if(yt_form.is_valid()):
-      yt_url = yt_form.cleaned_data['url']            
+#     if(fb_live_form.is_valid()):
+#       fb_live_url = fb_live_form.cleaned_data['url']
+#     else if(fb_non_live_form.is_valid()):
+#       fb_non_live_url = fb_non_live_form.cleaned_data['url']
+#     else if(yt_form.is_valid()):
+#       yt_url = yt_form.cleaned_data['url']            
 
 	
 def fb_video(request) :

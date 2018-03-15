@@ -41,8 +41,8 @@ def index(request):
       fb_non_live_url = fb_non_live_form.cleaned_data['url']
       return  redirect(fb_video_nonlive,video_url = fb_non_live_url)
     elif(yt_form.is_valid()):
-      yt_url = yt_form.cleaned_data['url']
-      return  redirect(youtube_video,video_url = yt_url)
+      youtube_url = yt_form.cleaned_data['url']
+      return  redirect(youtube_video,video_url = youtube_url)
 
   return render('index.html',{'fb_live_form':fb_live_form,'fb_non_live_form':fb_non_live_form,'yt_form':yt_form})    
 

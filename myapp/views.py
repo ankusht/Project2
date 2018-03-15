@@ -44,7 +44,7 @@ def index(request):
       youtube_url = yt_form.cleaned_data['url']
       return  redirect(youtube_video,video_url = youtube_url)
 
-  return render('index.html',{'fb_live_form':fb_live_form,'fb_non_live_form':fb_non_live_form,'yt_form':yt_form})    
+  return render(request, 'index.html',{'fb_live_form':fb_live_form,'fb_non_live_form':fb_non_live_form,'yt_form':yt_form})    
 
 
 	

@@ -128,5 +128,5 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'sainiabhi7734@gmail.com'
 EMAIL_HOST_PASSWORD = 'rank1000'
 
-import dj_database_url
-DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
+# import dj_database_url
+# DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)

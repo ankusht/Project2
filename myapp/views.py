@@ -37,10 +37,10 @@ def index(request):
     if(fb_live_form.is_valid()):
       fb_live_url = fb_live_form.cleaned_data['url']
       return  redirect(fb_video,video_url = fb_live_url)
-    else if(fb_non_live_form.is_valid()):
+    elif(fb_non_live_form.is_valid()):
       fb_non_live_url = fb_non_live_form.cleaned_data['url']
       return  redirect(fb_video_nonlive,video_url = fb_non_live_url)
-    else if(yt_form.is_valid()):
+    elif(yt_form.is_valid()):
       yt_url = yt_form.cleaned_data['url']
       return  redirect(youtube_video,video_url = yt_url)
 

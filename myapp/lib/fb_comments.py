@@ -33,7 +33,10 @@ def init(url) :
     print(response_json)
     print(response_json["comments"]["data"])
     jsonToLists(response_json["comments"]["data"])
-    live_status = response_json["live_status"]
+    try :
+        live_status = response_json["live_status"]
+    except:
+        live_status = None    
     video_duration = response_json["length"]
     output = {
         "live_status" : live_status ,

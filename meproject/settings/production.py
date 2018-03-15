@@ -25,7 +25,7 @@ SECRET_KEY = 'p%i64d4y%nwkbwve=$psb7z36duc165eo#u%py3s8!ja@$^$!&'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['frozen-waters-22551.herokuapp.com']
+ALLOWED_HOSTS = ['frozen-waters-22551.herokuapp.com','127.0.0.1']
 
 
 # Application definition

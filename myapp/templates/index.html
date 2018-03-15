@@ -1,16 +1,9 @@
-<!--
-  https://www.w3schools.com/code/tryit.asp?filename=FPCEZ7WZNOVL
-
-
-
--->
-
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <title>Bootstrap Example</title>
+    <title>Scrape_X</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="animate.css">
@@ -134,30 +127,30 @@
         <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <!-- <span class="icon-bar"></span>
         <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
+        <span class="icon-bar"></span> -->
       </button>
                 <a class="navbar-brand logo_name " href="#">scrape_X</a>
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Home</a></li>
-                    <li class="dropdown">
+                <!-- <ul class="nav navbar-nav"> -->
+                    <!-- <li class="active"><a href="#">Home</a></li> -->
+                    <!-- <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1 <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="#">Page 1-1</a></li>
                             <li><a href="#">Page 1-2</a></li>
                             <li><a href="#">Page 1-3</a></li>
                         </ul>
-                    </li>
-                    <li><a href="#">Page 2</a></li>
+                    </li> -->
+                    <!-- <li><a href="#">Page 2</a></li>
                     <li><a href="#">Page 3</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
+                </ul> -->
+                <!-- <ul class="nav navbar-nav navbar-right">
                     <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
                     <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                </ul>
+                </ul> -->
             </div>
         </div>
     </nav>
@@ -201,16 +194,23 @@
             <div id="in_about">
                 <!-- about me tab -->
                 <h1 class="about_me"> About Me </h1>
-                <h3>Abcdjdf</h3>
-                <p> kdjkajkjejkenjnfjjnewjnewjrnjewr</p>
+                <h3>Hii , I am scrape_X</h3>
+                <p> Basically I scrape data from sites like fb, youtube</p>
+                <p> I was developed as a project for code.fun.do</p>
+                <p> What I do with data is a bit interesting</p>
+                <p>I do sentiment analysis on the data to know the public opinion</p>
+                <p> The best thing of mine is I can do live analysis on FB videos</p>
+                <p> That is, once the video is uploaded completely then I can analyze the comments using the timestamps with each comment</p>
+                <p> This is how I manage to find the critical durations in videos.</p>
+                <p> I am thinking to learn a mail feature also, inorder to make users happy.</p>
             </div>
             <div id="in_youtube">
                 <h1 class="about_me"> Analysis on Youtube </h1>
-                <h3>Something</h3>
-                <p> jkjwjjfirwjfwie</p>
+                <h3>Do sentiment analysis of your videos in easy and convient way</h3>
+                <p> Know what people think about you</p>
                 <div id="url_field_yt">
-                    aaaaa
-                    <form action="">
+                    
+                    <form action="" method = "post">
                         <div class="form-group">
                             <label for="email">Enter Url:</label>
                             {{ yt_form }}
@@ -226,30 +226,33 @@
             <div id="in_fb">
                 <h1 class="about_me"> Analysis on Facebook </h1>
 
-                <a id="fb1" onclick="scrollFun()">
+                <!-- <a id="fb1" onclick="scrollFun()">
                     Non - live
                 </a>
                 <a id="fb2">
                   Live
-                </a>
-                <h3>Something</h3>
-                <p> jkjwjjfirwjfwie</p>
-                <p> jkjwjjfirwjfwie</p>
-                <p> jkjwjjfirwjfwie</p>
-                <p> jkjwjjfirwjfwie</p>
-                <p> jkjwjjfirwjfwie</p>
-                <p> jkjwjjfirwjfwie</p>
-                <p> jkjwjjfirwjfwie</p>
-                <p> jkjwjjfirwjfwie</p>
-                <p> jkjwjjfirwjfwie</p>
-                <p> jkjwjjfirwjfwie</p>
-                <p> jkjwjjfirwjfwie</p>
-                <p> jkjwjjfirwjfwie</p>
+                </a> -->
+                <h2>Analysis of Live Video</h2>
+                <p> Analyze your live videos once they are uploaded completely</p>
+                <p> An easy way to know the most sensitive part from your videos.</p>
+                <p> Also know the overall sentiments of audience on your video</p>
+                <p> Helpful in :</p>
+                <ul>
+                    <li>
+                        <p>Extracting important headlines out of a long video.</p>
+                    </li>
+                    <li>
+                        <p>To know the reaction of audience on your actions.</p>
+                    </li>
+                    <li>
+                        <p>Right now we support analysis for comment count upto 1000 only because of unsufficient space.
+                            But working to improve.</p>
+                    </li>
+                </ul>
 
 
                 <div id="url_field_fb_nonLive">
-                    aaaaa
-                    <form action="">
+                    <form action="" method = "post">
                         <div class="form-group">
                             <label for="email">Enter Url:</label>
                             {{fb_non_live_form}}
@@ -261,8 +264,7 @@
 
 
                 <div id="url_field_fb_live">
-                    aaaaa
-                    <form action="">
+                    <form action="" method = "post">
                         <div class="form-group">
                             <label for="email">Enter Url:</label>
                             {{fb_live_form}}
@@ -276,16 +278,10 @@
             </div>
             <div id="instructions">
                 <h1 class="about_me"> Instructions </h1>
-                <p>In this example, the navigation bar is hidden on small screens and replaced by a button in the top right corner (try to re-size this window).
-                    <p>Only when the button is clicked, the navigation bar will be displayed.</p>
-                    <p>In this example, the navigation bar is hidden on small screens and replaced by a button in the top right corner (try to re-size this window).
-                        <p>Only when the button is clicked, the navigation bar will be displayed.</p>
-                        <h3>Collapsible Navbar</h3>
-                        <p>In this example, the navigation bar is hidden on small screens and replaced by a button in the top right corner (try to re-size this window).
-                            <p>Only when the button is clicked, the navigation bar will be displayed.</p>
-
-                            <p>In this example, the navigation bar is hidden on small screens and replaced by a button in the top right corner (try to re-size this window).
-                                <p>Only when the button is clicked, the navigation bar will be displayed.</p>
+                <p>
+                    For video analysis on facebook , use url of type path/video/id only.
+                    Where id is a integer
+                </p>    
             </div>
         </div>
         <div class="foot_container">

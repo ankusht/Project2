@@ -103,6 +103,7 @@ def comment_threads_list_by_video_id(client, **kwargs):
 def init(video_id) :
   os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
   client = get_authenticated_service()
+  print(client)
   response_list = []
   tmp = 9
   response = comment_threads_list_by_video_id(client,

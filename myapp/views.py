@@ -10,6 +10,11 @@ from django.core.mail import send_mail
 import myapp.lib.output_fb as fb
 import myapp.lib.yt_output as youtube
 from .forms import *
+from django.views.decorators.csrf import csrf_exempt
+import myapp.lib.output_fb as fb
+import myapp.lib.yt_output as youtube
+import myapp.lib.output_fb_nonlive as fb_NL
+#import urllib2
 # Create your views here.
 def hello(request) :
 	alph = 110
@@ -26,25 +31,50 @@ def sendSimpleEmail(request,emailto):
 def alphaFn(request, var) :
 	return redirect(sendSimpleEmail,"abhisni@iitk.ac.in")
 
+@csrf_exempt
 def index(request):
   fb_live_form = fb_url_live()
   fb_non_live_form = fb_url_nonlive()
   yt_form = yt_url()
+
   if request.method == 'POST':
+    print("post")
     fb_live_form = fb_url_live(request.POST)
     fb_non_live_form = fb_url_nonlive(request.POST)
     yt_form = yt_url(request.POST)
     if(fb_live_form.is_valid()):
       fb_live_url = fb_live_form.cleaned_data['url']
-      return  redirect(fb_video,video_url = fb_live_url)
-    elif(fb_non_live_form.is_valid()):
+    if(fb_non_live_form.is_valid()):  
       fb_non_live_url = fb_non_live_form.cleaned_data['url']
-      return  redirect(fb_video_nonlive,video_url = fb_non_live_url)
-    elif(yt_form.is_valid()):
+    if(yt_form.is_valid()):  
       youtube_url = yt_form.cleaned_data['url']
-      return  redirect(youtube_video,video_url = youtube_url)
 
-  return render(request, 'index.html',{'fb_live_form':fb_live_form,'fb_non_live_form':fb_non_live_form,'yt_form':yt_form})    
+    if(fb_live_url):  
+      print(fb_live_url)
+      fb_live_url = str(fb_live_url)
+      output0 = fb.main(fb_live_url)
+      output = fb_NL.init(fb_live_url)
+      print(output0)
+      return render(request, "fb_live_analysis.html", {"times" : output0["time_break_list"], "scores" : output0["scores"], "total" : output["total_responses"],"url" : fb_live_url, "neg_score" : output["negative_score"],"pos_score" : output["positive_score"],"neg_perc" : output["percentage_neg"],"pos_perc" : output["percentage_pos"]})
+      #return  redirect(request, fb_video,fb_live_url)
+    
+    elif(fb_non_live_url):  
+      fb_non_live_url = str(fb_non_live_url)
+      print(fb_non_live_url)
+      output = youtube.main(fb_non_live_url)
+      print(output)
+      return render(request, "facebook_analysis_nonlive.html", {"total" : output["total_responses"],"url" : fb_non_live_url, "neg_score" : output["negative_score"],"pos_score" : output["positive_score"],"neg_perc" : output["percentage_neg"],"pos_perc" : output["percentage_pos"]})
+      #return  redirect(request, fb_video_nonlive,fb_non_live_url)
+    
+    elif(youtube_url):  
+      youtube_url = str(youtube_url)
+      print(youtube_url)
+      output = fb_NL.init(youtube_url)
+      print(output)
+      return render(request, "youtube_analysed.html", {"total" : output["total_responses"],"url" : youtube_url, "neg_score" : output["negative_score"],"pos_score" : output["positive_score"],"neg_perc" : output["percentage_neg"],"pos_perc" : output["percentage_pos"]})      
+      #return  redirect(request, youtube_video,youtube_url)
+
+  return render(request,'index.html', context={'fb_live_form':fb_live_form,'fb_non_live_form':fb_non_live_form,'yt_form':yt_form})   
 
 
 	

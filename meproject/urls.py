@@ -26,8 +26,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # path('fb/', views.fb_video),
     # path('', views.hello, name = 'hello'),
-    path('', views.fb_video),
+    path('', views.index),
     path('youtube/',views.youtube_video),
+    path('facebook/',views.fb_video)
+    path('facbook_non_live',views.fb_video_nonlive)
     url(r'^some/(?P<articleId>\d+)/$', views.viewArticle, name = 'some'),
     url(r'^login/$', auth_views.login),
 

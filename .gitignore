@@ -3,7 +3,7 @@ meproject/settings/local.python
 
 .DS_Store
 bin/
-include/
+include/	
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

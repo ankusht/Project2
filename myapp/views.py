@@ -9,6 +9,7 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from django.core.mail import send_mail
 import myapp.lib.output_fb as fb
 import myapp.lib.yt_output as youtube
+from .forms import *
 # Create your views here.
 def hello(request) :
 	alph = 110
@@ -25,32 +26,47 @@ def sendSimpleEmail(request,emailto):
 def alphaFn(request, var) :
 	return redirect(sendSimpleEmail,"abhisni@iitk.ac.in")
 
-# def index(request):
-#   if request.method == 'POST':
-#     fb_live_form = fb_url_live(request.POST)
-#     fb_non_live_form = fb_url_nonlive(request.POST)
-#     yt_form = yt_url(request.POST)
+def index(request):
+  fb_live_form = fb_url_live()
+  fb_non_live_form = fb_url_nonlive()
+  yt_form = yt_url()
+  if request.method == 'POST':
+    fb_live_form = fb_url_live(request.POST)
+    fb_non_live_form = fb_url_nonlive(request.POST)
+    yt_form = yt_url(request.POST)
+    if(fb_live_form.is_valid()):
+      fb_live_url = fb_live_form.cleaned_data['url']
+      return  redirect(fb_video,video_url = fb_live_url)
+    else if(fb_non_live_form.is_valid()):
+      fb_non_live_url = fb_non_live_form.cleaned_data['url']
+      return  redirect(fb_video_nonlive,video_url = fb_non_live_url)
+    else if(yt_form.is_valid()):
+      yt_url = yt_form.cleaned_data['url']
+      return  redirect(youtube_video,video_url = yt_url)
 
-#     if(fb_live_form.is_valid()):
-#       fb_live_url = fb_live_form.cleaned_data['url']
-#     else if(fb_non_live_form.is_valid()):
-#       fb_non_live_url = fb_non_live_form.cleaned_data['url']
-#     else if(yt_form.is_valid()):
-#       yt_url = yt_form.cleaned_data['url']            
+  return render('index.html',{'fb_live_form':fb_live_form,'fb_non_live_form':fb_non_live_form,'yt_form':yt_form})    
+
 
 	
-def fb_video(request) :
+def fb_video(request,video_url) :
     alph = 4
-    video_url = "https://www.facebook.com/election.commission.iitk/videos/597396273797338/"
-    output = fb.main(video_url)
-    print(output)
-    return render(request, "aa.html", {"array1" : output["time_break_list"]})
+    #video_url = "https://www.facebook.com/election.commission.iitk/videos/597396273797338/"
+    output0 = fb.main(video_url)
+    output = fb_NL.init(video_url)
+    print(output0)
+    return render(request, "fb_live_analysis.html", {"times" : output0["time_break_list"], "scores" : output0["scores"], "total" : output["total_responses"],"url" : video_url, "neg_score" : output["negative_score"],"pos_score" : output["positive_score"],"neg_perc" : output["percentage_neg"],"pos_perc" : output["percentage_pos"]})
 
-def youtube_video(request) :
-    video_url = "https://www.youtube.com/watch?v=3KenEVty7gg"
+def youtube_video(request,video_url) :
+    #video_url = "https://www.youtube.com/watch?v=3KenEVty7gg"
     output = youtube.main(video_url)
     print(output)
-    return render(request, "aa.html", {"array1" : 1})
+    return render(request, "youtube_analysed.html", {"total" : output["total_responses"],"url" : video_url, "neg_score" : output["negative_score"],"pos_score" : output["positive_score"],"neg_perc" : output["percentage_neg"],"pos_perc" : output["percentage_pos"]})
+
+def fb_video_nonlive(request,video_url) :
+    #video_url = "https://www.facebook.com/theindianviner/videos/1989026828090683/"
+    output = fb_NL.init(video_url)
+    print(output)
+    return render(request, "facebook_analysis_nonlive.html", {"total" : output["total_responses"],"url" : video_url, "neg_score" : output["negative_score"],"pos_score" : output["positive_score"],"neg_perc" : output["percentage_neg"],"pos_perc" : output["percentage_pos"]})
 
 
 

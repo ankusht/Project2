@@ -10,7 +10,7 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 # The CLIENT_SECRETS_FILE variable specifies the name of a file that contains
 # the OAuth 2.0 information for this application, including its client_id and
 # client_secret.
-CLIENT_SECRETS_FILE =  os.path.join(os.path.dirname(os.path.dirname(__file__)),"lib/client_secret_1.json")   
+CLIENT_SECRETS_FILE =  os.path.join(os.path.dirname(os.path.dirname(__file__)),"lib/client_secret_4.json")   
 # This OAuth 2.0 access scope allows for full read/write access to the
 # authenticated user's account and requires requests to use an SSL connection.
 SCOPES = ['https://www.googleapis.com/auth/youtube.force-ssl']

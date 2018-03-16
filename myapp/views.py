@@ -72,7 +72,7 @@ def index(request):
     if(yt_form.is_valid() and youtube_url):  
       youtube_url = str(youtube_url)
       print("youtube = ",youtube_url)
-      output = youtube.init(youtube_url)
+      output = youtube.main(youtube_url)
       print(output)
       return render(request, "youtube_analysed.html", {"total" : output["total_responses"],"url" : youtube_url, "neg_score" : output["negative_score"],"pos_score" : output["positive_score"],"neg_perc" : output["percentage_neg"],"pos_perc" : output["percentage_pos"]})      
       #return  redirect(request, youtube_video,youtube_url)

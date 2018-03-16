@@ -43,14 +43,17 @@ def index(request):
     fb_non_live_form = fb_url_nonlive(request.POST)
     yt_form = yt_url(request.POST)
     if(fb_live_form.is_valid()):
-      fb_live_url = fb_live_form.cleaned_data['url']
-    if(fb_non_live_form.is_valid()):  
-      fb_non_live_url = fb_non_live_form.cleaned_data['url']
-    if(yt_form.is_valid()):  
-      youtube_url = yt_form.cleaned_data['url']
-
-    if(fb_live_url):  
+      fb_live_url = fb_live_form.cleaned_data['url1']
       print(fb_live_url)
+    if(fb_non_live_form.is_valid()):  
+      fb_non_live_url = fb_non_live_form.cleaned_data['url2']
+      print(fb_non_live_url)
+    if(yt_form.is_valid()):  
+      youtube_url = yt_form.cleaned_data['url3']
+      print(youtube_url)
+
+    if(fb_live_form.is_valid() and fb_live_url):  
+      print("live = ",fb_live_url)
       fb_live_url = str(fb_live_url)
       output0 = fb.main(fb_live_url)
       output = fb_NL.init(fb_live_url)
@@ -58,18 +61,18 @@ def index(request):
       return render(request, "fb_live_analysis.html", {"times" : output0["time_break_list"], "scores" : output0["scores"], "total" : output["total_responses"],"url" : fb_live_url, "neg_score" : output["negative_score"],"pos_score" : output["positive_score"],"neg_perc" : output["percentage_neg"],"pos_perc" : output["percentage_pos"]})
       #return  redirect(request, fb_video,fb_live_url)
     
-    elif(fb_non_live_url):  
+    if(fb_non_live_form.is_valid() and fb_non_live_url):  
       fb_non_live_url = str(fb_non_live_url)
-      print(fb_non_live_url)
-      output = youtube.main(fb_non_live_url)
+      print("non-live = ",fb_non_live_url)
+      output = fb_NL.init(fb_non_live_url)
       print(output)
       return render(request, "facebook_analysis_nonlive.html", {"total" : output["total_responses"],"url" : fb_non_live_url, "neg_score" : output["negative_score"],"pos_score" : output["positive_score"],"neg_perc" : output["percentage_neg"],"pos_perc" : output["percentage_pos"]})
       #return  redirect(request, fb_video_nonlive,fb_non_live_url)
     
-    elif(youtube_url):  
+    if(yt_form.is_valid() and youtube_url):  
       youtube_url = str(youtube_url)
-      print(youtube_url)
-      output = fb_NL.init(youtube_url)
+      print("youtube = ",youtube_url)
+      output = youtube.init(youtube_url)
       print(output)
       return render(request, "youtube_analysed.html", {"total" : output["total_responses"],"url" : youtube_url, "neg_score" : output["negative_score"],"pos_score" : output["positive_score"],"neg_perc" : output["percentage_neg"],"pos_perc" : output["percentage_pos"]})      
       #return  redirect(request, youtube_video,youtube_url)
@@ -78,22 +81,22 @@ def index(request):
 
 
 	
-def fb_video(request,video_url) :
+def fb_video(request) :
     alph = 4
-    #video_url = "https://www.facebook.com/election.commission.iitk/videos/597396273797338/"
+    video_url = "https://www.facebook.com/election.commission.iitk/videos/597396273797338/"
     output0 = fb.main(video_url)
     output = fb_NL.init(video_url)
     print(output0)
     return render(request, "fb_live_analysis.html", {"times" : output0["time_break_list"], "scores" : output0["scores"], "total" : output["total_responses"],"url" : video_url, "neg_score" : output["negative_score"],"pos_score" : output["positive_score"],"neg_perc" : output["percentage_neg"],"pos_perc" : output["percentage_pos"]})
 
-def youtube_video(request,video_url) :
-    #video_url = "https://www.youtube.com/watch?v=3KenEVty7gg"
+def youtube_video(request) :
+    video_url = "https://www.youtube.com/watch?v=3KenEVty7gg"
     output = youtube.main(video_url)
     print(output)
     return render(request, "youtube_analysed.html", {"total" : output["total_responses"],"url" : video_url, "neg_score" : output["negative_score"],"pos_score" : output["positive_score"],"neg_perc" : output["percentage_neg"],"pos_perc" : output["percentage_pos"]})
 
-def fb_video_nonlive(request,video_url) :
-    #video_url = "https://www.facebook.com/theindianviner/videos/1989026828090683/"
+def fb_video_nonlive(request) :
+    video_url = "https://www.facebook.com/theindianviner/videos/1989026828090683/"
     output = fb_NL.init(video_url)
     print(output)
     return render(request, "facebook_analysis_nonlive.html", {"total" : output["total_responses"],"url" : video_url, "neg_score" : output["negative_score"],"pos_score" : output["positive_score"],"neg_perc" : output["percentage_neg"],"pos_perc" : output["percentage_pos"]})
